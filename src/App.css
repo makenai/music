@@ -1,0 +1,50 @@
+.App {
+  padding: 20px;
+  font-size: 20px;
+}
+
+.nav {
+  display: flex;
+  padding: 20px;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.nav a {
+  display: block;
+  padding-right: 10px;
+}
+
+.piano {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  border-left: 1px solid black;
+}
+
+.pianoKey {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.whiteKey {
+  width: 60px;
+  height: 300px;
+  border: 1px solid black;
+  border-left: 0;
+}
+
+.blackKey {
+  width: 40px;
+  height: 200px;
+  background-color: black;
+  color: white;
+  margin-left: -20px;
+  margin-right: -20px;
+}
