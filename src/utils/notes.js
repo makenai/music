@@ -8,10 +8,11 @@ export class Note {
             this.octave = Number(parts[2]);
         }
         if (typeof note === 'number') {
-            this.note = Notes[note % 12];
-            this.octave = Math.floor(note / 12);
+            const noteNumber = note % 12;
+            this.note = Notes[noteNumber];
+            this.octave = Math.floor(note / 12) + 
+                (noteNumber >= 3 ? 1 : 0); // Octaves change on C, not on A
         }
-        console.log(this.note, this.octave)
     }
 
     toString() {
@@ -20,7 +21,9 @@ export class Note {
 
     valueOf() {
         const normalizedNote = FlatToSharp[this.note] || this.note;
-        return (this.octave * 12) + Notes.indexOf(normalizedNote);
+        const noteNumber = Notes.indexOf(normalizedNote);
+        const octaveNumber = this.octave - (noteNumber >= 3 ? 1 : 0);
+        return (octaveNumber * 12) + noteNumber; 
     }
 }
 
@@ -28,7 +31,7 @@ export const notesBetween = (from, to) => {
     const startNote = new Note(from);
     const endNote = new Note(to);
     if (startNote > endNote) {
-        throw 'Bad Notes';
+        throw new Error('BadNotes');
     }
     const notes = [ startNote ];
     for (let i=startNote.valueOf() + 1; i<endNote.valueOf(); i++) {

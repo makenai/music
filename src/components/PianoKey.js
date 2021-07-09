@@ -1,9 +1,14 @@
 import cx from 'classnames';
 import { isBlackKey } from '../utils/piano';
 
-const PianoKey = ({ note, onClick=()=>{} }) => {
+const PianoKey = ({ note, onPlay }) => {
     const classNames = cx('pianoKey', isBlackKey(note) ? 'blackKey' : 'whiteKey');
-    return (<div className={classNames} onClick={onClick}>
+    const keyProps = {};
+    if (onPlay) {
+        keyProps.onMouseDown = onPlay;
+        keyProps.onMouseOver = e => e.buttons === 1 && onPlay();
+    }
+    return (<div role="link" className={classNames} {...keyProps}>
         {note}
     </div>);
 };
