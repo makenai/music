@@ -1,7 +1,7 @@
 import React from 'react';
 import useState from 'react-usestateref'
 import ModesRoute from './routes/Modes';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Header';
 import { SynthContext } from './utils/synth';
 import './App.scss';
