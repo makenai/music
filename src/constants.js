@@ -22,6 +22,10 @@ export const Notes = [
     'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'
 ];
 
+export const Solfege = [
+    'Do', 'Di', 'Re', 'Ri', 'Mi', 'Fa', 'Fi', 'So', 'Si', 'La', 'Li', 'Ti'
+];
+
 export const NoteRegex = new RegExp(/^([A-G][b#]?)(-?\d+)$/);
 
 export const FlatToSharp = {

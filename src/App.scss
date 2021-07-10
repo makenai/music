@@ -21,3 +21,33 @@ body {
     margin-right: 20px;
   }
 }
+
+.is-major {
+  border-color: transparent;
+  background-color: #D9B2FF;
+  color: black;
+}
+
+.is-minor {
+  border-color: transparent;
+  background-color: #BAF3C3;
+  color: black;
+}
+
+.is-diminished {
+  border-color: transparent;
+  background-color: #F9FC9D;
+  color: black;
+}
+
+.is-augmented {
+  border-color: transparent;
+  background-color: #FFCBCF;
+  color: black;
+}
+
+.fork-me {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

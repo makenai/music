@@ -5,7 +5,8 @@ import './Header.scss';
 
 const tabs = [
   { title: 'Home', pathname: '/' },
-  { title: 'Modes', pathname: '/modes' }
+  { title: 'Modes', pathname: '/modes' },
+  { title: 'Intro to Chords', pathname: '/introChords' }
 ];
 
 const Header = () => {

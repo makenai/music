@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { isArray } from 'lodash';
 import * as Tone from "tone";
 
 // https://react.christmas/2020/15
@@ -8,6 +9,16 @@ import * as Tone from "tone";
 const synth = new Tone.PolySynth().toDestination();
 const SynthContext = React.createContext({});
 
+const toggleNotes = (note, status) => {
+  if (isArray(note)) {
+    const values = {};
+    note.forEach(note => values[note] = status);
+    return values;
+  } else {
+    return { [note]: status };
+  }
+};
+
 const useSynth = () => {
   const { notes, setNotes, ref } = useContext(SynthContext);
 
@@ -15,10 +26,10 @@ const useSynth = () => {
     const time = Tone.now() + delay;
     synth.triggerAttackRelease(note, duration, time);
     Tone.Draw.schedule(function(){
-      setNotes({ ...ref.current, [note]: true });
+      setNotes({ ...ref.current, ...toggleNotes(note, true) });
     }, time);
     Tone.Draw.schedule(function(){
-      setNotes({ ...ref.current, [note]: false });
+      setNotes({ ...ref.current, ...toggleNotes(note, false) });
     }, time + duration);
   }
   

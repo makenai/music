@@ -1,44 +1,48 @@
-import { Notes, FlatToSharp, NoteRegex, BadNoteError, BadNoteRangeError } from '../constants';
+import { Notes, Solfege, FlatToSharp, NoteRegex, BadNoteError, BadNoteRangeError } from '../constants';
 
 /**
  * Get the numeric value of a single note like 'A' or 'Cb' for sorting
  * @param {string} note 
  * @returns {number} noteNumber
  */
-const noteValue = note => Notes.indexOf(FlatToSharp[note] || note); 
+const noteValue = note => Notes.indexOf(FlatToSharp[note] || note);
 
 /**
  * Note class for sorting, comparison etc.
  */
 export class Note {
-    constructor(note) {
-        if (typeof note === 'string') {
-            const noteMatch = NoteRegex.exec(note);
-            if (!noteMatch) {
-                throw new BadNoteError(`"${note}" was not in a valid format`);
-            }
-            this.note = noteMatch[1];
-            if (noteValue(this.note) === -1) {
-                throw new BadNoteError(`"${this.note}" is not a valid note`)
-            }
-            this.octave = Number(noteMatch[2]);
-        }
-        if (typeof note === 'number') {
-            const noteNumber = note % 12;
-            this.note = Notes[noteNumber];
-            this.octave = Math.floor(note / 12) - 1;
-        }
+  constructor(note) {
+    if (typeof note === 'string') {
+      const noteMatch = NoteRegex.exec(note);
+      if (!noteMatch) {
+        throw new BadNoteError(`"${note}" was not in a valid format`);
+      }
+      this.note = noteMatch[1];
+      if (noteValue(this.note) === -1) {
+        throw new BadNoteError(`"${this.note}" is not a valid note`)
+      }
+      this.octave = Number(noteMatch[2]);
     }
+    if (typeof note === 'number') {
+      const noteNumber = note % 12;
+      this.note = Notes[noteNumber];
+      this.octave = Math.floor(note / 12) - 1;
+    }
+  }
 
-    toString() {
-        return `${this.note}${this.octave}`;
-    }
+  toString() {
+    return `${this.note}${this.octave}`;
+  }
 
-    valueOf() {
-        const noteNumber = noteValue(this.note);
-        const octaveNumber = this.octave + 1;
-        return (octaveNumber * 12) + noteNumber;
-    }
+  valueOf() {
+    const noteNumber = noteValue(this.note);
+    const octaveNumber = this.octave + 1;
+    return (octaveNumber * 12) + noteNumber;
+  }
+
+  solfege() {
+    return Solfege[noteValue(this.note)];
+  }
 }
 
 /**
@@ -48,17 +52,17 @@ export class Note {
  * @returns {array}
  */
 export const notesBetween = (from, to) => {
-    const startNote = new Note(from);
-    const endNote = new Note(to);
-    if (startNote > endNote) {
-        throw new BadNoteRangeError('Start note must be lower than end note');
-    }
-    const notes = [ startNote ];
-    for (let i=startNote.valueOf() + 1; i<endNote.valueOf(); i++) {
-        notes.push(new Note(i));
-    }
-    notes.push(endNote);
-    return notes.map(note => note.toString());
+  const startNote = new Note(from);
+  const endNote = new Note(to);
+  if (startNote > endNote) {
+    throw new BadNoteRangeError('Start note must be lower than end note');
+  }
+  const notes = [startNote];
+  for (let i = startNote.valueOf() + 1; i < endNote.valueOf(); i++) {
+    notes.push(new Note(i));
+  }
+  notes.push(endNote);
+  return notes.map(note => note.toString());
 }
 
 /**
@@ -67,13 +71,17 @@ export const notesBetween = (from, to) => {
  * @param {number} startOctave 
  * @returns {array}
  */
-export const addOctaves = (notes, startOctave=4) => {
-    let octave = Number(startOctave);
-    let prevNoteNumber = null;
-    return notes.map((note, i) => {
-        const noteNumber = noteValue(note);
-        if (prevNoteNumber !== null && noteNumber < prevNoteNumber) octave += 1;
-        prevNoteNumber = noteNumber;
-        return `${note}${octave}`;
-    });
+export const addOctaves = (notes, startOctave = 4) => {
+  let octave = Number(startOctave);
+  let prevNoteNumber = null;
+  return notes.map((note, i) => {
+    const noteNumber = noteValue(note);
+    if (prevNoteNumber !== null && noteNumber < prevNoteNumber) octave += 1;
+    prevNoteNumber = noteNumber;
+    return `${note}${octave}`;
+  });
+};
+
+export const solfegeName = (note) => {
+  return new Note(note).solfege();
 };
