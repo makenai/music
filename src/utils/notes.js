@@ -67,11 +67,13 @@ export const notesBetween = (from, to) => {
  * @param {number} startOctave 
  * @returns {array}
  */
-export const addOctave = (notes, startOctave=4) => {
-    let octave = startOctave;
-    let passedOctave = false;
+export const addOctaves = (notes, startOctave=4) => {
+    let octave = Number(startOctave);
+    let prevNoteNumber = null;
     return notes.map((note, i) => {
         const noteNumber = noteValue(note);
+        if (prevNoteNumber !== null && noteNumber < prevNoteNumber) octave += 1;
+        prevNoteNumber = noteNumber;
         return `${note}${octave}`;
     });
 };

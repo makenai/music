@@ -1,4 +1,4 @@
-import { Note, notesBetween, addOctave } from './notes';
+import { Note, notesBetween, addOctaves } from './notes';
 import { BadNoteError, BadNoteRangeError } from '../constants';
 
 describe('Note class', () => {
@@ -55,16 +55,14 @@ describe('notesBetween', () => {
 
 });
 
-describe('addOctave', () => {
+describe('addOctaves', () => {
 
   it('can add octaves to notes in a sequence', () => {
-    const eMajor = addOctave(['E',  'F',  'G',  'A',  'B',  'C',  'D',  'E' ], 4);
-    console.log(eMajor);
+    const phrygianMode = addOctaves(['E',  'F',  'G',  'A',  'B',  'C',  'D',  'E' ], 4);
+    expect(phrygianMode).toEqual(  ['E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5']);
   
-    // expect(eMajor).toEqual(  ['E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5']);
-  
-    // const cMajor = addOctave(['C',  'D',  'E',  'F',  'G',  'A',  'B',  'C' ], 3);
-    // expect(cMajor).toEqual(  ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4']);
+    const cMajor = addOctaves(['C',  'D',  'E',  'F',  'G',  'A',  'B',  'C' ], '2');
+    expect(cMajor).toEqual(  ['C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3']);
   });
 
 });

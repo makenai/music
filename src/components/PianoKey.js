@@ -1,8 +1,10 @@
 import cx from 'classnames';
 import { isBlackKey } from '../utils/piano';
+import { useSynth } from '../utils/synth';
 
 const PianoKey = ({ note, onPlay }) => {
-    const classNames = cx('pianoKey', isBlackKey(note) ? 'blackKey' : 'whiteKey');
+    const { notes } = useSynth(); 
+    const classNames = cx('pianoKey', isBlackKey(note) ? 'blackKey' : 'whiteKey', { playing: notes[note] } );
     const keyProps = {};
     if (onPlay) {
         keyProps.onMouseDown = onPlay;
