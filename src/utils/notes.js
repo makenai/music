@@ -1,17 +1,32 @@
-import { Notes, FlatToSharp, NoteRegex } from '../constants';
+import { Notes, FlatToSharp, NoteRegex, BadNoteError, BadNoteRangeError } from '../constants';
 
+/**
+ * Get the numeric value of a single note like 'A' or 'Cb' for sorting
+ * @param {string} note 
+ * @returns {number} noteNumber
+ */
+const noteValue = note => Notes.indexOf(FlatToSharp[note] || note); 
+
+/**
+ * Note class for sorting, comparison etc.
+ */
 export class Note {
     constructor(note) {
         if (typeof note === 'string') {
-            const parts = NoteRegex.exec(note);
-            this.note = parts[1];
-            this.octave = Number(parts[2]);
+            const noteMatch = NoteRegex.exec(note);
+            if (!noteMatch) {
+                throw new BadNoteError(`"${note}" was not in a valid format`);
+            }
+            this.note = noteMatch[1];
+            if (noteValue(this.note) === -1) {
+                throw new BadNoteError(`"${this.note}" is not a valid note`)
+            }
+            this.octave = Number(noteMatch[2]);
         }
         if (typeof note === 'number') {
             const noteNumber = note % 12;
             this.note = Notes[noteNumber];
-            this.octave = Math.floor(note / 12) + 
-                (noteNumber >= 3 ? 1 : 0); // Octaves change on C, not on A
+            this.octave = Math.floor(note / 12) - 1;
         }
     }
 
@@ -20,18 +35,23 @@ export class Note {
     }
 
     valueOf() {
-        const normalizedNote = FlatToSharp[this.note] || this.note;
-        const noteNumber = Notes.indexOf(normalizedNote);
-        const octaveNumber = this.octave - (noteNumber >= 3 ? 1 : 0);
-        return (octaveNumber * 12) + noteNumber; 
+        const noteNumber = noteValue(this.note);
+        const octaveNumber = this.octave + 1;
+        return (octaveNumber * 12) + noteNumber;
     }
 }
 
+/**
+ * Given two notes with octaves, return an array of all of the notes between them, inclusively
+ * @param {string} from 
+ * @param {string} to 
+ * @returns {array}
+ */
 export const notesBetween = (from, to) => {
     const startNote = new Note(from);
     const endNote = new Note(to);
     if (startNote > endNote) {
-        throw new Error('BadNotes');
+        throw new BadNoteRangeError('Start note must be lower than end note');
     }
     const notes = [ startNote ];
     for (let i=startNote.valueOf() + 1; i<endNote.valueOf(); i++) {
@@ -40,3 +60,18 @@ export const notesBetween = (from, to) => {
     notes.push(endNote);
     return notes.map(note => note.toString());
 }
+
+/**
+ * Given a collection of sorted notes without octaves, add the given octave
+ * @param {array} notes 
+ * @param {number} startOctave 
+ * @returns {array}
+ */
+export const addOctave = (notes, startOctave=4) => {
+    let octave = startOctave;
+    let passedOctave = false;
+    return notes.map((note, i) => {
+        const noteNumber = noteValue(note);
+        return `${note}${octave}`;
+    });
+};
