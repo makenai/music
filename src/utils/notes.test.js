@@ -57,9 +57,9 @@ describe('notesBetween', () => {
 
 describe('addOctave', () => {
 
-  it('can add octaves to notes in a scale', () => {
-    // const eMajor = addOctave(['E',  'F',  'G',  'A',  'B',  'C',  'D',  'E' ], 4);
-    // console.log(eMajor);
+  it('can add octaves to notes in a sequence', () => {
+    const eMajor = addOctave(['E',  'F',  'G',  'A',  'B',  'C',  'D',  'E' ], 4);
+    console.log(eMajor);
   
     // expect(eMajor).toEqual(  ['E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5']);
   

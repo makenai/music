@@ -1,5 +1,5 @@
 import React from 'react';
-import ScalesRoute from './routes/Scales';
+import ModesRoute from './routes/Modes';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Header';
 import './App.scss';
@@ -14,8 +14,8 @@ function App() {
             <p>Hello, doing some stuff to follow along with <a href="https://www.coursera.org/learn/edinburgh-music-theory">Fundamentals of Music Theory</a>.</p>
             <p>-Pawel</p>
           </Route>
-          <Route path="/scales">
-            <ScalesRoute />
+          <Route path="/modes">
+            <ModesRoute />
           </Route>
         </Switch>
       </Router>

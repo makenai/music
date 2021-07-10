@@ -32,7 +32,7 @@ export const FlatToSharp = {
     'Bb': 'A#'
 };
 
-export const Scales = {
+export const Modes = {
     Ionian:     'CDEFGABC'.split(''),
     Dorian:     'DEFGABCD'.split(''),
     Phrygian:   'EFGABCDE'.split(''),

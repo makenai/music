@@ -1,29 +1,29 @@
 import { useState } from 'react';
-import { Scales } from '../constants'; 
+import { Modes } from '../constants'; 
 import Piano from '../components/Piano';
 import { addOctave } from '../utils/notes';
 import { playNotes } from '../utils/synth';
 import { last } from 'lodash';
 
 
-const ScalesRoute = () => {
-    const [ scale, setScale ] = useState('Ionian');
-    const scaleNotes = Scales[scale]; 
-    const startNote = scaleNotes[0] + '4';
-    const endNote = last(scaleNotes) + '5';
+const ModesRoute = () => {
+    const [ mode, setMode ] = useState('Ionian');
+    const modeNotes = Modes[mode]; 
+    const startNote = modeNotes[0] + '4';
+    const endNote = last(modeNotes) + '5';
 
     const handleSequence = () => {
-        playNotes(scaleNotes);
+        playNotes(modeNotes);
     }
 
     return (<div>
         <div className="box controls">
             <div>
-                <label className="label">Scale</label>
+                <label className="label">Mode</label>
                 <div className="select">
-                    <select onChange={(e) => setScale(e.target.value)}>
-                    {Object.keys(Scales).map(scaleName => (
-                        <option value={scaleName} key={scaleName}>{scaleName}</option>
+                    <select onChange={(e) => setMode(e.target.value)}>
+                    {Object.keys(Modes).map(modeName => (
+                        <option value={modeName} key={modeName}>{modeName}</option>
                     ))}
                     </select>
                 </div>
@@ -37,4 +37,4 @@ const ScalesRoute = () => {
 };
 
 
-export default ScalesRoute;
+export default ModesRoute;
