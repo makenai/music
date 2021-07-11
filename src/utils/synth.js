@@ -9,20 +9,23 @@ import * as Tone from "tone";
 const synth = new Tone.PolySynth().toDestination();
 const SynthContext = React.createContext({});
 
-const toggleNotes = (note, status) => {
-  if (isArray(note)) {
-    const values = {};
-    note.forEach(note => values[note] = status);
-    return values;
-  } else {
-    return { [note]: status };
-  }
-};
+/**
+ * Given a single note or array of notes, return an object with boolean value of status
+ * @param {string|string[]} note 
+ * @param {boolean} status 
+ * @example 
+ * // returns { "A4": true, "E5" true }
+ * toggleNote(['A4', 'E5'], true)
+ * @returns {Object}
+ */
+const toggleNotes = (note, status) => isArray(note)
+    ? note.reduce((notes, note) => ({ ...notes, [note]: status }), {})
+    : { [note]: status };
 
 const useSynth = () => {
   const { notes, setNotes, ref } = useContext(SynthContext);
 
-  function playNote(note, duration=0.25, delay=0) {
+  function playNote(note, duration=0.3, delay=0) {
     const time = Tone.now() + delay;
     synth.triggerAttackRelease(note, duration, time);
     Tone.Draw.schedule(function(){
@@ -30,7 +33,7 @@ const useSynth = () => {
     }, time);
     Tone.Draw.schedule(function(){
       setNotes({ ...ref.current, ...toggleNotes(note, false) });
-    }, time + duration);
+    }, time + duration - 0.05);
   }
   
   function playNotes(notes, delay=0.35) {
