@@ -1,4 +1,4 @@
-import { Note, notesBetween, addOctaves } from './notes';
+import { Note, notesBetween, addOctaves, getInterval, noteCmp } from './notes';
 import { BadNoteError, BadNoteRangeError } from '../constants';
 
 describe('Note class', () => {
@@ -63,6 +63,44 @@ describe('addOctaves', () => {
   
     const cMajor = addOctaves(['C',  'D',  'E',  'F',  'G',  'A',  'B',  'C' ], '2');
     expect(cMajor).toEqual(  ['C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3']);
+  });
+
+});
+
+
+describe('noteCmp', () => {
+  it('compares two notes', () => {
+    expect(noteCmp('C4', 'C4')).toEqual(0);
+    expect(noteCmp('A#3', 'Bb3')).toEqual(0);
+    expect(noteCmp('C5', 'C4')).toEqual(-1);
+    expect(noteCmp('A4', 'C8')).toEqual(1);
+  });
+});
+
+
+describe('getInterval', () => {
+
+  it('can calc interval between two notes', () => {
+    const cg = getInterval('C4', 'G4');
+    expect(cg.semitones).toEqual(7);
+    expect(cg.name).toEqual('Perfect fifth');
+    // expect(cg.pattern).toEqual(['T', 'T', 'S', 'T']);
+
+    const ae = getInterval('A4', 'E5');
+    expect(ae.semitones).toEqual(7);
+    expect(ae.name).toEqual('Perfect fifth');
+
+    // expect(ae.pattern).toEqual(['T', 'S', 'T', 'T']);
+
+    const ce = getInterval('C4', 'E4');
+    expect(ce.semitones).toEqual(4);
+    expect(ce.name).toEqual('Major third');
+    // expect(ce.pattern).toEqual(['T', 'T']);
+
+    const ac = getInterval('A4', 'C5');
+    expect(ac.semitones).toEqual(3);
+    expect(ac.name).toEqual('Minor third');
+    // expect(ce.pattern).toEqual(['T', 'S']);
   });
 
 });

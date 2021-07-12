@@ -44,10 +44,6 @@ const IntroChords = () => {
 - **Major triads** have a perfect fifth and a major third
 - **Minor triads** have a perfecct fifth and a minor third
 - **Diminished triads** have a diminished fifth and a minor third
-- **Perfect Fifth**: 7 semitones between notes (C and G)
-- **Diminished Fifth**: 6 semitones between notes (B and F)
-- **Major Third**: 4 semitones between notes (C and E)
-- **Minor Third**: 3 semitones between notes (D and F)
   `}</StudyNotes>
   </div>);
 

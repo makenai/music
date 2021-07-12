@@ -27,6 +27,7 @@ export const Solfege = [
 ];
 
 export const NoteRegex = new RegExp(/^([A-G][b#]?)(-?\d+)$/);
+export const NaturalNoteRegex = new RegExp(/^([A-G])(-?\d+)$/);
 
 export const FlatToSharp = {
     'Db': 'C#',
@@ -44,6 +45,22 @@ export const Modes = {
     Mixoludian: 'GABCDEFG'.split(''),
     Aeolian:    'ABCDEFGA'.split(''),
     Locrian:    'BCDEFGAB'.split('')
+};
+
+export const Intervals = {
+    0: 'Perfect unison',
+    1: 'Minor second',
+    2: 'Major second',
+    3: 'Minor third',
+    4: 'Major third',
+    5: 'Perfect fourth',
+    6: 'Tritone',
+    7: 'Perfect fifth',
+    8: 'Minor sixth',
+    9: 'Major sixth',
+    10: 'Minor seventh',
+    11: 'Major seventh',
+    12: 'Perfect octave'
 };
 
 export class BadNoteError extends Error {}

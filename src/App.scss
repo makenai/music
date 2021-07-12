@@ -10,12 +10,13 @@ body {
 }
 
 .App {
-  padding: 20px;
+  padding: 10px;
   font-size: 20px;
 }
 
 .controls {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
   >* {
     margin-right: 20px;
@@ -50,4 +51,23 @@ body {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.firstNote, .secondNote {
+  border-radius: 10px;
+  padding: 5px;
+  color: black;
+}
+
+.controls {
+  .firstNote, .secondNote {
+  }
+}
+
+.firstNote {
+  background-color: #BAF3C3;
+}
+
+.secondNote {
+  background-color: #FFCBCF;
 }

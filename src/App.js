@@ -1,11 +1,13 @@
 import React from 'react';
 import useState from 'react-usestateref'
-import ModesRoute from './routes/Modes';
-import IntroChordsRoute from './routes/IntroChords';
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Header';
 import { SynthContext } from './utils/synth';
 import './App.scss';
+
+import IntervalsRoute from './routes/Intervals';
+import ModesRoute from './routes/Modes';
+import IntroChordsRoute from './routes/IntroChords';
 
 function App() {
   const [ notes, setNotes, ref ] = useState({});
@@ -18,6 +20,9 @@ function App() {
             <Route exact path="/">
               <p>Hello, doing some stuff to follow along with <a href="https://www.coursera.org/learn/edinburgh-music-theory">Fundamentals of Music Theory</a>.</p>
               <p>-Pawel</p>
+            </Route>
+            <Route path="/intervals">
+              <IntervalsRoute />
             </Route>
             <Route path="/modes">
               <ModesRoute />

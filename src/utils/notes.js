@@ -1,4 +1,13 @@
-import { Notes, Solfege, FlatToSharp, NoteRegex, BadNoteError, BadNoteRangeError } from '../constants';
+import { 
+  Notes, 
+  Solfege, 
+  FlatToSharp, 
+  NoteRegex, 
+  NaturalNoteRegex,
+  Intervals,
+  BadNoteError, 
+  BadNoteRangeError
+} from '../constants';
 
 /**
  * Get the numeric value of a single note like 'A' or 'Cb' for sorting
@@ -82,6 +91,40 @@ export const addOctaves = (notes, startOctave = 4) => {
   });
 };
 
+/**
+ * Return the solfege name for a note
+ * @param {*} note 
+ * @returns 
+ */
 export const solfegeName = (note) => {
   return new Note(note).solfege();
+};
+
+/**
+ * Returns true of note is note a sharp or flat
+ */
+export const isNaturalNote = note => NaturalNoteRegex.test(note);
+
+/**
+ * C-style comparison function for two note strings
+ * @param {string} a 
+ * @param {string} b 
+ * @returns {number} -1, 0, or 1
+ */
+export const noteCmp = (a, b) => {
+  const noteA = new Note(a);
+  const noteB = new Note(b);
+  if (noteA.valueOf() === noteB.valueOf()) {
+    return 0;
+  }
+  return noteA > noteB ? -1 : 1;
+}
+
+export const getInterval = (from, to) => {
+  const notes = notesBetween(from, to);
+  const semitones = notes.length - 1;
+  return {
+    semitones,
+    ...(Intervals[semitones] ? { name: Intervals[semitones] } : {})
+  };
 };
