@@ -5,9 +5,11 @@ import {
   NoteRegex, 
   NaturalNoteRegex,
   Intervals,
+  ABCAccidentals,
   BadNoteError, 
   BadNoteRangeError
 } from '../constants';
+import { repeat, toLower } from 'lodash-es';
 
 /**
  * Get the numeric value of a single note like 'A' or 'Cb' for sorting
@@ -49,9 +51,34 @@ export class Note {
     return (octaveNumber * 12) + noteNumber;
   }
 
+  baseNote() {
+    return this.note.substring(0,1);
+  }
+
+  accidental() {
+    return this.note.substring(1,2);
+  }
+
+  octave() {
+    return this.octave;
+  }
+
   solfege() {
     return Solfege[noteValue(this.note)];
   }
+
+  toABCNotation() {
+    const note = `${ABCAccidentals[this.accidental()]}${this.baseNote()}`;
+    if (this.octave < 4) 
+      return `${note}${repeat(',', 4 - this.octave)}`;
+    if (this.octave === 4)
+      return note;
+    if (this.octave === 5)
+      return toLower(note);
+    if (this.octave > 5)
+      return `${toLower(note)}${repeat("'", this.octave - 5)}`;
+  }
+
 }
 
 /**
@@ -119,6 +146,19 @@ export const noteCmp = (a, b) => {
   }
   return noteA > noteB ? -1 : 1;
 }
+
+/**
+ * Covnert an array of notes to ABC notation
+ * @param {string[]} notes
+ * @returns {string} ABC notated string
+ */
+ export const notesToABC = (notes) => {
+  if (!notes || notes.length === 0) {
+    return [];
+  }
+  return notes.map(note => new Note(note).toABCNotation());
+};
+
 
 export const getInterval = (from, to) => {
   const notes = notesBetween(from, to);

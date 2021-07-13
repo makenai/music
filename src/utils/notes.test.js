@@ -1,4 +1,4 @@
-import { Note, notesBetween, addOctaves, getInterval, noteCmp } from './notes';
+import { Note, notesBetween, addOctaves, getInterval, noteCmp, notesToABC } from './notes';
 import { BadNoteError, BadNoteRangeError } from '../constants';
 
 describe('Note class', () => {
@@ -42,6 +42,32 @@ describe('Note class', () => {
     expect(As5 > A5).toBeTruthy();
   });
 
+  it('can return base notes, accidentals, and octaves', () => {
+    const cs5 = new Note('C#5');
+    expect(cs5.baseNote()).toEqual('C');
+    expect(cs5.accidental()).toEqual('#');
+    const df4 = new Note('Db5'); 
+    expect(df4.baseNote()).toEqual('D');
+    expect(df4.accidental()).toEqual('b');
+    const a4 = new Note('A4');
+    expect(a4.baseNote()).toEqual('A');
+    expect(a4.accidental()).toEqual('');
+  });
+
+  it('can convert a note to ABC notation', () => {
+    expect(new Note('C0').toABCNotation()).toEqual('C,,,,');
+    expect(new Note('C1').toABCNotation()).toEqual('C,,,');
+    expect(new Note('C2').toABCNotation()).toEqual('C,,');
+    expect(new Note('C3').toABCNotation()).toEqual('C,');
+    expect(new Note('C4').toABCNotation()).toEqual('C');
+    expect(new Note('C5').toABCNotation()).toEqual('c');
+    expect(new Note('C6').toABCNotation()).toEqual("c'");
+    expect(new Note('C7').toABCNotation()).toEqual("c''");
+    expect(new Note('C8').toABCNotation()).toEqual("c'''");
+    expect(new Note('A#6').toABCNotation()).toEqual("^a'");
+    expect(new Note('Db4').toABCNotation()).toEqual("_D");
+  });
+
 });
 
 describe('notesBetween', () => {
@@ -76,6 +102,22 @@ describe('noteCmp', () => {
     expect(noteCmp('A4', 'C8')).toEqual(1);
   });
 });
+
+describe('notesToABC', () => {
+
+  it('returns an empty array with no notes', () => {
+    expect(notesToABC()).toEqual([]);
+    expect(notesToABC([])).toEqual([]);
+  })
+  
+  it('converts octaves 4-6', () => {
+    expect(notesToABC(
+      ['C4','D4','E4','F4','G4','A4','B4','C5','D5','E5','F5','G5','A5','B5','C6'])
+    ).toEqual(
+      ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'c', 'd', 'e', 'f', 'g', 'a', 'b', "c'"]
+    );
+  });
+})
 
 
 describe('getInterval', () => {

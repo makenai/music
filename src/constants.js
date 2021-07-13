@@ -63,5 +63,11 @@ export const Intervals = {
     12: 'Perfect octave'
 };
 
+export const ABCAccidentals = {
+     '': '',
+    '#': '^',
+    'b': '_'
+};
+
 export class BadNoteError extends Error {}
 export class BadNoteRangeError extends Error {}

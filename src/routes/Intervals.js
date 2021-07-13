@@ -3,7 +3,9 @@ import { useSynth } from '../utils/synth';
 import { getInterval, noteCmp } from '../utils/notes';
 import Piano from '../components/Piano';
 import StudyNotes from '../components/StudyNotes';
+import MusicNotation from '../components/MusicNotation';
 import styled from 'styled-components';
+import { compact } from 'lodash-es';
 
 const IntervalDisplay = styled.div`
   display: flex;
@@ -21,6 +23,7 @@ const IntervalDisplay = styled.div`
     margin-right: 10px;
     text-align: center;
   }
+  height: 60px;
 `;
 
 const IntervalsRoute = () => {
@@ -67,6 +70,7 @@ const IntervalsRoute = () => {
   return (<>
     <div className="box controls">
       <IntervalDisplay>
+        <MusicNotation notes={compact([note1,note2])} width={200} padNotes={2} />
         {note1 && <div className="firstNote">
             {note1}
         </div>}
