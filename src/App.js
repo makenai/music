@@ -10,9 +10,9 @@ import ModesRoute from './routes/Modes';
 import IntroChordsRoute from './routes/IntroChords';
 
 function App() {
-  const [ notes, setNotes, ref ] = useState({});
+  const [ notesPlaying, setNotesPlaying, ref ] = useState({});
   return (
-    <SynthContext.Provider value={{ notes, setNotes, ref }}>
+    <SynthContext.Provider value={{ notesPlaying, setNotesPlaying, ref }}>
       <div className="App">
         <Router>
           <Header />

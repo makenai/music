@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useSynth } from '../utils/synth';
-import { getInterval, noteCmp } from '../utils/notes';
-import Piano from '../components/Piano';
-import StudyNotes from '../components/StudyNotes';
-import MusicNotation from '../components/MusicNotation';
+import { useSynth } from '../../utils/synth';
+import { getInterval, noteCmp } from '../../utils/notes';
+import Piano from '../../components/Piano';
+import StudyNotes from '../../components/StudyNotes';
+import MusicNotation from '../../components/MusicNotation';
 import styled from 'styled-components';
 import { compact } from 'lodash-es';
 
@@ -22,6 +22,14 @@ const IntervalDisplay = styled.div`
     padding: 10px;
     margin-right: 10px;
     text-align: center;
+  }
+  .abcjs-n0 {
+    fill: #BAF3C3;
+    stroke: black;
+  }
+  .abcjs-n1 {
+    fill: #FFCBCF;
+    stroke: black;
   }
   height: 60px;
 `;

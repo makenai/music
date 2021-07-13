@@ -3,8 +3,8 @@ import { solfegeName, isNaturalNote } from '../utils/notes';
 import { useSynth } from '../utils/synth';
 
 const PianoKey = ({ note, onPlay, highlight, renderAdditionalKeyLabel, noDrag }) => {
-  const { notes } = useSynth();
-  const classNames = cx('pianoKey', isNaturalNote(note) ? 'whiteKey' : 'blackKey', { playing: notes[note] }, { highlight });
+  const { notesPlaying } = useSynth();
+  const classNames = cx('pianoKey', isNaturalNote(note) ? 'whiteKey' : 'blackKey', { playing: notesPlaying[note] }, { highlight });
   const keyProps = {};
   if (onPlay) {
     keyProps.onMouseDown = e => { e.stopPropagation(); onPlay(); }

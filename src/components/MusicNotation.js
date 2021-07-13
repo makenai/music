@@ -1,7 +1,7 @@
 import { Notation } from 'react-abc';
 import { notesToABC } from '../utils/notes';
 
-const MusicNotation = ({ notes, width=500, height=100, padNotes=10 }) => {
+const MusicNotation = ({ notes, width=500, height=100, padNotes=10, highlightNotes=[] }) => {
 
   const onClick = (abcelem, tuneNumber, classes, analysis, drag) => {
   };
@@ -10,6 +10,11 @@ const MusicNotation = ({ notes, width=500, height=100, padNotes=10 }) => {
   while(abcNotes.length < padNotes) {
     abcNotes.push('x');
   }
+
+  const dynamicCSS = highlightNotes.map(note => {
+    const noteNumber = notes.indexOf(note);
+    return `svg > .abcjs-n${noteNumber} { fill: #ff00ff !important; }`;
+  }).join("\n");
 
   const renderParams =  {
     add_classes: true,
@@ -28,6 +33,7 @@ const MusicNotation = ({ notes, width=500, height=100, padNotes=10 }) => {
   };
 
   return (<div style={containerStyle} className="music-notation">
+      <style type="text/css">{dynamicCSS}</style>
       <Notation 
         renderParams={renderParams}
         notation={`[L:1] ${abcNotes.join(' ')}|`} />

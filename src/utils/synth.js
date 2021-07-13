@@ -23,16 +23,16 @@ const toggleNotes = (note, status) => isArray(note)
     : { [note]: status };
 
 const useSynth = () => {
-  const { notes, setNotes, ref } = useContext(SynthContext);
+  const { notesPlaying, setNotesPlaying, ref } = useContext(SynthContext);
 
   function playNote(note, duration=0.3, delay=0) {
     const time = Tone.now() + delay;
     synth.triggerAttackRelease(note, duration, time);
     Tone.Draw.schedule(function(){
-      setNotes({ ...ref.current, ...toggleNotes(note, true) });
+      setNotesPlaying({ ...ref.current, ...toggleNotes(note, true) });
     }, time);
     Tone.Draw.schedule(function(){
-      setNotes({ ...ref.current, ...toggleNotes(note, false) });
+      setNotesPlaying({ ...ref.current, ...toggleNotes(note, false) });
     }, time + duration - 0.05);
   }
   
@@ -42,7 +42,7 @@ const useSynth = () => {
     })
   }
 
-  return { playNote, playNotes, notes };
+  return { playNote, playNotes, notesPlaying };
 };
 
 
