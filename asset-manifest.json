@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/music/static/css/main.94a45707.chunk.css",
-    "main.js": "/music/static/js/main.ecd33c45.chunk.js",
-    "main.js.map": "/music/static/js/main.ecd33c45.chunk.js.map",
-    "runtime-main.js": "/music/static/js/runtime-main.810e5c78.js",
-    "runtime-main.js.map": "/music/static/js/runtime-main.810e5c78.js.map",
-    "static/css/2.2074096e.chunk.css": "/music/static/css/2.2074096e.chunk.css",
-    "static/js/2.4bd5bbb7.chunk.js": "/music/static/js/2.4bd5bbb7.chunk.js",
-    "static/js/2.4bd5bbb7.chunk.js.map": "/music/static/js/2.4bd5bbb7.chunk.js.map",
-    "static/js/3.e204b57a.chunk.js": "/music/static/js/3.e204b57a.chunk.js",
-    "static/js/3.e204b57a.chunk.js.map": "/music/static/js/3.e204b57a.chunk.js.map",
+    "main.css": "/music/static/css/main.77386050.chunk.css",
+    "main.js": "/music/static/js/main.0196645f.chunk.js",
+    "main.js.map": "/music/static/js/main.0196645f.chunk.js.map",
+    "runtime-main.js": "/music/static/js/runtime-main.240e856b.js",
+    "runtime-main.js.map": "/music/static/js/runtime-main.240e856b.js.map",
+    "static/css/2.6c9bb021.chunk.css": "/music/static/css/2.6c9bb021.chunk.css",
+    "static/js/2.2b3d5128.chunk.js": "/music/static/js/2.2b3d5128.chunk.js",
+    "static/js/2.2b3d5128.chunk.js.map": "/music/static/js/2.2b3d5128.chunk.js.map",
+    "static/js/3.dc242d21.chunk.js": "/music/static/js/3.dc242d21.chunk.js",
+    "static/js/3.dc242d21.chunk.js.map": "/music/static/js/3.dc242d21.chunk.js.map",
     "index.html": "/music/index.html",
-    "static/css/2.2074096e.chunk.css.map": "/music/static/css/2.2074096e.chunk.css.map",
-    "static/css/main.94a45707.chunk.css.map": "/music/static/css/main.94a45707.chunk.css.map",
-    "static/js/2.4bd5bbb7.chunk.js.LICENSE.txt": "/music/static/js/2.4bd5bbb7.chunk.js.LICENSE.txt"
+    "static/css/2.6c9bb021.chunk.css.map": "/music/static/css/2.6c9bb021.chunk.css.map",
+    "static/css/main.77386050.chunk.css.map": "/music/static/css/main.77386050.chunk.css.map",
+    "static/js/2.2b3d5128.chunk.js.LICENSE.txt": "/music/static/js/2.2b3d5128.chunk.js.LICENSE.txt",
+    "static/media/style.css": "/music/static/media/step-backward.668fe580.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.810e5c78.js",
-    "static/css/2.2074096e.chunk.css",
-    "static/js/2.4bd5bbb7.chunk.js",
-    "static/css/main.94a45707.chunk.css",
-    "static/js/main.ecd33c45.chunk.js"
+    "static/js/runtime-main.240e856b.js",
+    "static/css/2.6c9bb021.chunk.css",
+    "static/js/2.2b3d5128.chunk.js",
+    "static/css/main.77386050.chunk.css",
+    "static/js/main.0196645f.chunk.js"
   ]
 }
