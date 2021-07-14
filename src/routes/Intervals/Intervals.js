@@ -24,12 +24,10 @@ const IntervalDisplay = styled.div`
     text-align: center;
   }
   .abcjs-n0 {
-    fill: #BAF3C3;
-    stroke: black;
+    fill: green;
   }
   .abcjs-n1 {
-    fill: #FFCBCF;
-    stroke: black;
+    fill: red;
   }
   height: 60px;
 `;

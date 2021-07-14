@@ -8,7 +8,7 @@ const Piano = ({
     startNote= 'C4',
     endNote='C5',
     highlightNotes=[],
-    onPlay=noop,
+    onPlay,
     renderAdditionalKeyLabel=noop,
     noDrag
 }) => {
