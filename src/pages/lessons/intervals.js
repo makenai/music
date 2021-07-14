@@ -1,36 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useSynth } from '../../utils/synth';
-import { getInterval, noteCmp } from '../../utils/notes';
-import Piano from '../../components/Piano';
-import StudyNotes from '../../components/StudyNotes';
-import MusicNotation from '../../components/MusicNotation';
-import styled from 'styled-components';
-import { compact } from 'lodash-es';
-
-const IntervalDisplay = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  .firstNote, .secondNote {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 60px;
-  }
-  >div {
-    padding: 10px;
-    margin-right: 10px;
-    text-align: center;
-  }
-  .abcjs-n0 {
-    fill: green;
-  }
-  .abcjs-n1 {
-    fill: red;
-  }
-  height: 60px;
-`;
+import React, { useState, useEffect } from 'react';
+import { useSynth } from 'utils/synth';
+import { getInterval, noteCmp } from 'utils/notes';
+import Piano from 'components/Piano';
+import StudyNotes from 'components/StudyNotes';
+import MusicNotation from 'components/MusicNotation';
+import { compact } from 'lodash';
+import style from 'styles/lessons/intervals.module.scss';
 
 const IntervalsRoute = () => {
   const { playNote } = useSynth();
@@ -75,7 +50,7 @@ const IntervalsRoute = () => {
 
   return (<>
     <div className="box controls">
-      <IntervalDisplay>
+      <div className={style['intervals-display']}>
         <MusicNotation notes={compact([note1,note2])} width={200} padNotes={2} />
         {note1 && <div className="firstNote">
             {note1}
@@ -89,7 +64,7 @@ const IntervalsRoute = () => {
           <div>
             {interval.semitones} semitones{interval.name && `, ${interval.name}`}
           </div></>}
-      </IntervalDisplay>
+      </div>
     </div>
     <Piano startNote="C4" endNote="C6" onPlay={handlePlay} renderAdditionalKeyLabel={renderInsideKey} noDrag />
     <StudyNotes>{`

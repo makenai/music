@@ -9,7 +9,7 @@ import {
   BadNoteError, 
   BadNoteRangeError
 } from '../constants';
-import { repeat, toLower } from 'lodash-es';
+import { repeat, toLower } from 'lodash';
 
 /**
  * Get the numeric value of a single note like 'A' or 'Cb' for sorting

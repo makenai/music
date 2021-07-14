@@ -1,24 +1,23 @@
 import React from 'react';
-import { Link, useLocation } from "react-router-dom";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import cx from 'classnames';
-import './Header.scss';
 
 const tabs = [
   { title: 'Home', pathname: '/' },
-  { title: 'Intervals', pathname: '/intervals' },
-  { title: 'Modes', pathname: '/modes' },
-  { title: 'Intro to Chords', pathname: '/introChords' }
+  { title: 'Intervals', pathname: '/lessons/intervals' },
+  { title: 'Modes', pathname: '/lessons/modes' },
+  { title: 'Intro to Chords', pathname: '/lessons/intro_chords' }
 ];
 
 const Header = () => {
-  const location = useLocation();
   return (
   <div className="header">
     <h1 className="title">Music Theory Class Experiments</h1>
     <div className="tabs">
       <ul>
-        {tabs.map((tab,i) => (<li key={i} className={cx({ 'is-active': tab.pathname === location.pathname })}>
-          <Link to={tab.pathname}>{tab.title}</Link>
+        {tabs.map((tab,i) => (<li key={i} className={cx({ 'is-active': false })}>
+          <Link href={tab.pathname}>{tab.title}</Link>
         </li>))}
       </ul>
     </div>

@@ -1,0 +1,24 @@
+.intervals-display {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  :global(.firstNote), :global(.secondNote) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+  }
+  >div {
+    padding: 10px;
+    margin-right: 10px;
+    text-align: center;
+  }
+  :global(.abcjs-n0) {
+    fill: green;
+  }
+  :global(.abcjs-n1) {
+    fill: red;
+  }
+  height: 60px;
+}

@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Modes } from '../../constants';
-import Piano from '../../components/Piano';
-import StudyNotes from '../../components/StudyNotes';
-import { addOctaves } from '../../utils/notes';
-import { useSynth } from '../../utils/synth';
+import React, { useState } from 'react';
+import { Modes } from 'constants';
+import Piano from 'components/Piano';
+import StudyNotes from 'components/StudyNotes';
+import { addOctaves } from 'utils/notes';
+import { useSynth } from 'utils/synth';
 import { first, last, shuffle } from 'lodash';
-import MusicNotation from '../../components/MusicNotation';
+import MusicNotation from 'components/MusicNotation';
 
 const ModesRoute = () => {
   const { playNotes, notesPlaying } = useSynth(); 

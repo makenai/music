@@ -20,7 +20,7 @@
   &.playing {
     box-shadow: none;
   }
-  .firstNote, .secondNote {
+  :global(.firstNote), :global(.secondNote) {
     width: 26px;
     height: 26px;
     display: flex;

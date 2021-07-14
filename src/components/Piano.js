@@ -1,8 +1,9 @@
-import { notesBetween } from '../utils/notes';
+import React from 'react';
+import { notesBetween } from 'utils/notes';
 import PianoKey from './PianoKey';
-import { useSynth } from '../utils/synth';
-import { noop } from 'lodash-es';
-import './Piano.scss';
+import { useSynth } from 'utils/synth';
+import { noop } from 'lodash';
+import styles from 'styles/components/Piano.module.scss';
 
 const Piano = ({
     startNote= 'C4',
@@ -15,7 +16,7 @@ const Piano = ({
     const { playNote } = useSynth();
     const notes = notesBetween(startNote, endNote);
     const handlePlay = (note) => playNote(note);
-    return (<div className="piano">
+    return (<div className={styles.piano}>
         {notes.map(note => <PianoKey 
             note={note} 
             key={note} 

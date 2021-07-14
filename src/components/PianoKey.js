@@ -1,10 +1,13 @@
+import React from 'react';
+import { solfegeName, isNaturalNote } from 'utils/notes';
+import { useSynth } from 'utils/synth';
+import styles from 'styles/components/Piano.module.scss';
 import cx from 'classnames';
-import { solfegeName, isNaturalNote } from '../utils/notes';
-import { useSynth } from '../utils/synth';
+
 
 const PianoKey = ({ note, onPlay, highlight, renderAdditionalKeyLabel, noDrag }) => {
   const { notesPlaying } = useSynth();
-  const classNames = cx('pianoKey', isNaturalNote(note) ? 'whiteKey' : 'blackKey', { playing: notesPlaying[note] }, { highlight });
+  const classNames = cx(styles.pianoKey, isNaturalNote(note) ? styles.whiteKey : styles.blackKey, { [styles.playing]: notesPlaying[note] }, { [styles.highlight]: highlight });
   const keyProps = {};
   if (onPlay) {
     keyProps.onMouseDown = e => { e.stopPropagation(); onPlay(); }
@@ -14,8 +17,8 @@ const PianoKey = ({ note, onPlay, highlight, renderAdditionalKeyLabel, noDrag })
   }
   return (<div role="link" className={classNames} {...keyProps}>
     {renderAdditionalKeyLabel(note)}
-    <div className="solfege">{solfegeName(note)}</div>
-    <div className="noteName">{note}</div>
+    <div className={styles.solfeg}>{solfegeName(note)}</div>
+    <div className={styles.noteName}>{note}</div>
   </div>);
 };
 

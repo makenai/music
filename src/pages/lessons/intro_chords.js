@@ -1,7 +1,7 @@
-import { useState } from 'react'; 
-import Piano from '../../components/Piano';
-import StudyNotes from '../../components/StudyNotes';
-import { useSynth } from '../../utils/synth';
+import React, { useState } from 'react'; 
+import Piano from 'components/Piano';
+import StudyNotes from 'components/StudyNotes';
+import { useSynth } from 'utils/synth';
 import cx from 'classnames';
 
 const cMajorChords = [

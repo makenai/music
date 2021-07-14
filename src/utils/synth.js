@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { isArray } from 'lodash';
 import * as Tone from "tone";
 
@@ -6,8 +6,10 @@ import * as Tone from "tone";
 // https://www.guitarland.com/MusicTheoryWithToneJS/PlayMajorScale.html
 // https://www.devbridge.com/articles/tonejs-coding-music-production-guide/
 
-const synth = new Tone.PolySynth().toDestination();
 const SynthContext = React.createContext({});
+const synth = (typeof window !== 'undefined')
+  ? new Tone.PolySynth().toDestination()
+  : {};
 
 /**
  * Given a single note or array of notes, return an object with boolean value of status

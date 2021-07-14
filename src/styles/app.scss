@@ -9,6 +9,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.header {
+  margin-bottom: 20px;
+}
+
 .App {
   padding: 10px;
   font-size: 20px;
@@ -65,4 +69,11 @@ body {
 
 .secondNote {
   background-color: #FFCBCF;
+}
+
+.study-notes {
+  margin-top: 40px;
+  border-top: 1px solid #888;
+  padding-top: 20px;
+  font-size: 16px;
 }
