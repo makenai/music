@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modes } from 'constants';
+import { Modes } from 'appConstants';
 import Piano from 'components/Piano';
 import StudyNotes from 'components/StudyNotes';
 import { addOctaves } from 'utils/notes';

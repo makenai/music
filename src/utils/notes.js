@@ -8,7 +8,7 @@ import {
   ABCAccidentals,
   BadNoteError, 
   BadNoteRangeError
-} from '../constants';
+} from 'appConstants';
 import { repeat, toLower } from 'lodash';
 
 /**

@@ -1,5 +1,5 @@
 import { Note, notesBetween, addOctaves, getInterval, noteCmp, notesToABC } from './notes';
-import { BadNoteError, BadNoteRangeError } from '../constants';
+import { BadNoteError, BadNoteRangeError } from 'appConstants';
 
 describe('Note class', () => {
 
