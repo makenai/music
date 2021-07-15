@@ -1,5 +1,5 @@
-import { Note, notesBetween, addOctaves, getInterval, noteCmp, notesToABC } from './notes';
-import { BadNoteError, BadNoteRangeError } from 'appConstants';
+import { Note, notesBetween, addOctaves, getInterval, noteCmp, notesToABC, applyTonePattern } from './notes';
+import { BadNoteError, BadNoteRangeError, MajorScalePattern } from 'appConstants';
 
 describe('Note class', () => {
 
@@ -143,6 +143,14 @@ describe('getInterval', () => {
     expect(ac.semitones).toEqual(3);
     expect(ac.name).toEqual('Minor third');
     // expect(ce.pattern).toEqual(['T', 'S']);
+  });
+
+});
+
+describe('applyTonePattern', () => {
+  it('can create some major scales', () => {
+    expect(applyTonePattern('C4', MajorScalePattern)).toEqual(['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5']);
+    expect(applyTonePattern('G4', MajorScalePattern)).toEqual(['G4', 'A4', 'B4', 'C5', 'D5', 'E5', 'F#5', 'G5']);
   });
 
 });

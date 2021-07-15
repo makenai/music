@@ -69,5 +69,7 @@ export const ABCAccidentals = {
     'b': '_'
 };
 
+export const MajorScalePattern = 'TTSTTTS';
+
 export class BadNoteError extends Error {}
 export class BadNoteRangeError extends Error {}

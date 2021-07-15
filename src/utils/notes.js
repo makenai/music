@@ -168,3 +168,23 @@ export const getInterval = (from, to) => {
     ...(Intervals[semitones] ? { name: Intervals[semitones] } : {})
   };
 };
+
+/**
+ * Apply a note pattern to a note in Tones and Semitones, returning an array of resulting notes
+ * @param {string} note 
+ * @param {string} pattern 
+ */
+export const applyTonePattern = (note, pattern='') => {
+  let currentValue = new Note(note).valueOf();
+  const notes = [ currentValue ];
+  pattern.split('').forEach(tone => {
+    if (tone === 'T') {
+      currentValue += 2;
+    } else if (tone === 'S') {
+      currentValue += 1;
+    }
+    notes.push(currentValue);
+  });
+  return notes.map(note => new Note(note).toString());
+}
+

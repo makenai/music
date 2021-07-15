@@ -7,7 +7,8 @@ const tabs = [
   { title: 'Home', pathname: '/' },
   { title: 'Intervals', pathname: '/lessons/intervals' },
   { title: 'Modes', pathname: '/lessons/modes' },
-  { title: 'Intro to Chords', pathname: '/lessons/intro_chords' }
+  { title: 'Intro to Chords', pathname: '/lessons/intro_chords' },
+  { title: 'Major Scales', pathname: '/lessons/major_scales' }
 ];
 
 const Header = () => {
