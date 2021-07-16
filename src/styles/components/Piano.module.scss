@@ -42,7 +42,7 @@
   border-left: 0;
   z-index: 10;
   &.highlight {
-    background-color: #eee;
+    background-color: #D7DCFF;
   }
   &.playing {
     background-color: #ddd;
@@ -52,13 +52,13 @@
 .blackKey {
   width: 40px;
   height: 200px;
-  background-color: #333;
+  background-color: #222;
   color: white;
   margin-left: -20px;
   margin-right: -20px;
   z-index: 100;
   &.highlight {
-    background-color: #666;
+    background-color: #000073;
   }
   &.playing {
     background-color: #000;

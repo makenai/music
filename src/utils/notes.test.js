@@ -152,5 +152,4 @@ describe('applyTonePattern', () => {
     expect(applyTonePattern('C4', MajorScalePattern)).toEqual(['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5']);
     expect(applyTonePattern('G4', MajorScalePattern)).toEqual(['G4', 'A4', 'B4', 'C5', 'D5', 'E5', 'F#5', 'G5']);
   });
-
 });

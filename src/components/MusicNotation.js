@@ -4,7 +4,7 @@ const abcJS = (typeof window !== 'undefined')
   ? require('abcjs') 
   : {};
 
-const MusicNotation = ({ notes, width=500, height=100, padNotes=10, highlightNotes=[] }) => {
+const MusicNotation = ({ notes, width=500, height=100, padNotes=10, scale=1, highlightNotes=[] }) => {
 
   const notationEl = useRef();
 
@@ -23,7 +23,8 @@ const MusicNotation = ({ notes, width=500, height=100, padNotes=10, highlightNot
       paddingtop: 0,
       paddingleft: 0,
       paddingright: 0,
-      clickListener: onClick
+      clickListener: onClick,
+      scale
     };
     abcJS.renderAbc(notationEl.current, notation, renderParams);
   }, [ notation, width ]);
@@ -33,7 +34,8 @@ const MusicNotation = ({ notes, width=500, height=100, padNotes=10, highlightNot
   
   const containerStyle = {
     width: `${width}px`,
-    height: `${height}px`
+    height: `${height}px`,
+    overflow: 'hidden'
   };
 
   return (<div style={containerStyle} className="music-notation">

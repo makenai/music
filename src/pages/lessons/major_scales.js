@@ -34,7 +34,7 @@ const MajorScales = () => {
     <div className="box controls">
       {Notes.map(note => (
         <button 
-          className={cx('button')} 
+          className={cx('button', 'is-primary')} 
           key={note} 
           onMouseOver={() => handleHover(note)}
           onMouseOut={() => handleHover()}

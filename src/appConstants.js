@@ -26,6 +26,10 @@ export const Solfege = [
     'Do', 'Di', 'Re', 'Ri', 'Mi', 'Fa', 'Fi', 'So', 'Si', 'La', 'Li', 'Ti'
 ];
 
+export const NaturalNotes = [
+    'C', 'D', 'E', 'F', 'G', 'A', 'B'
+];
+
 export const NoteRegex = new RegExp(/^([A-G][b#]?)(-?\d+)$/);
 export const NaturalNoteRegex = new RegExp(/^([A-G])(-?\d+)$/);
 

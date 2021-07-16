@@ -7,21 +7,27 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.header {
-  margin-bottom: 20px;
-}
-
-.App {
-  padding: 10px;
   font-size: 20px;
+  background-color: #fffdfd;
+}
+
+.navbar {
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+  .navbar-brand svg {
+    height: 40px;
+    width: auto;
+  }
+}
+
+.appContent {
+  padding: 1.5rem;
 }
 
 .controls {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
+  background-color: white;
   >* {
     margin-right: 20px;
   }

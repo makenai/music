@@ -187,4 +187,3 @@ export const applyTonePattern = (note, pattern='') => {
   });
   return notes.map(note => new Note(note).toString());
 }
-
