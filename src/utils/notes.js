@@ -7,9 +7,10 @@ import {
   Intervals,
   ABCAccidentals,
   BadNoteError, 
-  BadNoteRangeError
+  BadNoteRangeError,
+  ChordTypes
 } from 'appConstants';
-import { repeat, toLower } from 'lodash';
+import { repeat, toLower, max, uniq } from 'lodash';
 
 /**
  * Get the numeric value of a single note like 'A' or 'Cb' for sorting
@@ -28,55 +29,67 @@ export class Note {
       if (!noteMatch) {
         throw new BadNoteError(`"${note}" was not in a valid format`);
       }
-      this.note = noteMatch[1];
-      if (noteValue(this.note) === -1) {
-        throw new BadNoteError(`"${this.note}" is not a valid note`)
+      this._note = noteMatch[1];
+      if (noteValue(this._note) === -1) {
+        throw new BadNoteError(`"${this._note}" is not a valid note`)
       }
-      this.octave = Number(noteMatch[2]);
+      this._octave = Number(noteMatch[2]);
     }
     if (typeof note === 'number') {
       const noteNumber = note % 12;
-      this.note = Notes[noteNumber];
-      this.octave = Math.floor(note / 12) - 1;
+      this._note = Notes[noteNumber];
+      this._octave = Math.floor(note / 12) - 1;
     }
   }
 
   toString() {
-    return `${this.note}${this.octave}`;
+    return `${this._note}${this._octave}`;
   }
 
   valueOf() {
-    const noteNumber = noteValue(this.note);
-    const octaveNumber = this.octave + 1;
+    const noteNumber = noteValue(this._note);
+    const octaveNumber = this._octave + 1;
     return (octaveNumber * 12) + noteNumber;
   }
 
-  baseNote() {
-    return this.note.substring(0,1);
+  naturalNote() {
+    return this._note.substring(0,1);
   }
 
   accidental() {
-    return this.note.substring(1,2);
+    return this._note.substring(1,2);
+  }
+
+  note() {
+    return this._note;
+  }
+
+  setNote(note) {
+    this._note = note;
   }
 
   octave() {
-    return this.octave;
+    return this._octave;
+  }
+
+  setOctave(octave) {
+    this._octave = octave;
   }
 
   solfege() {
-    return Solfege[noteValue(this.note)];
+    return Solfege[noteValue(this._note)];
   }
 
   toABCNotation() {
-    const note = `${ABCAccidentals[this.accidental()]}${this.baseNote()}`;
-    if (this.octave < 4) 
-      return `${note}${repeat(',', 4 - this.octave)}`;
-    if (this.octave === 4)
+    const note = `${ABCAccidentals[this.accidental()]}${this.naturalNote()}`;
+    if (this._octave < 4) 
+      return `${note}${repeat(',', 4 - this._octave)}`;
+    if (this._octave === 4)
       return note;
-    if (this.octave === 5)
+    if (this._octave === 5)
       return toLower(note);
-    if (this.octave > 5)
-      return `${toLower(note)}${repeat("'", this.octave - 5)}`;
+    if (this._octave > 5)
+      return `${toLower(note)}${repeat("'", this._octave - 5)}`;
   }
 
 }
@@ -187,3 +200,43 @@ export const applyTonePattern = (note, pattern='') => {
   });
   return notes.map(note => new Note(note).toString());
 }
+
+/**
+ * Get the notes for the nth degrees in a scale, going up an octave and looping as needed
+ * @param {number[]} degrees 
+ * @param {string[]} scaleNotes 
+ */
+export const getDegreesInScale = (degrees, scaleNotes) => {
+  const highestDegree = max(degrees);
+  const expandedScale = [];
+  const loopCount = Math.ceil(highestDegree / scaleNotes.length);
+  for (let i=0; i<loopCount;i++) {
+    const notes = scaleNotes.map(scaleNote => {
+      const note = new Note(scaleNote);
+      note.setOctave(note.octave() + i);
+      return note.toString();
+    })
+    expandedScale.push(...notes);
+  }
+  const uniqScale = uniq(expandedScale); // Probably a better way to do this?
+  return degrees.map(degree => uniqScale[degree - 1]);
+}
+
+/**
+ * Given some notes, give the name of a chord
+ * @param {string[]} chordNotes
+ */
+export const chordName = (chordNotes) => {
+  const notes = chordNotes.map(note => new Note(note));
+  const rootNote = notes[0].note();
+  const distances = [];
+  let prevNote;
+  notes.forEach(note => {
+    if (prevNote) {
+      distances.push(note.valueOf() - prevNote.valueOf());
+    }
+    prevNote = note;
+  });
+  const chordType = ChordTypes[distances.join('-')] || '???';
+  return `${rootNote}${chordType}`;
+};

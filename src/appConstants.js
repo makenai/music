@@ -75,5 +75,11 @@ export const ABCAccidentals = {
 
 export const MajorScalePattern = 'TTSTTTS';
 
+export const ChordTypes = {
+    '4-3': 'maj',
+    '3-4': 'min',
+    '3-3': 'dim'
+};
+
 export class BadNoteError extends Error {}
 export class BadNoteRangeError extends Error {}

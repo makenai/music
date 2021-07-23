@@ -22,7 +22,7 @@ const NotesQuiz = () => {
     return newNote;
   };
 
-  const isCorrect = (question, guess) => new Note(question).baseNote() === guess;
+  const isCorrect = (question, guess) => new Note(question).naturalNote() === guess;
   const [ question, setQuestion ] = useState(getNextNote(scoreData?.previousRound?.[0]));
   const { playNote } = useSynth();
 

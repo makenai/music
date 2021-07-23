@@ -19,6 +19,13 @@ body {
   }
 }
 
+.header-breadcrumbs {
+  padding: 1.25rem;
+  padding-bottom: 0;
+  font-size: 20px;
+  margin-bottom: 0 !important;
+}
+
 .appContent {
   padding: 1.5rem;
 }
@@ -57,13 +64,7 @@ body {
   color: black;
 }
 
-.fork-me {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.firstNote, .secondNote {
+.firstNote, .secondNote, .noteNumber {
   border-radius: 10px;
   padding: 5px;
   color: black;
@@ -75,6 +76,18 @@ body {
 
 .secondNote {
   background-color: #FFCBCF;
+}
+
+.noteNumber {
+  background-color: white;
+  border: 2px solid black;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .study-notes {

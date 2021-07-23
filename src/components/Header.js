@@ -16,7 +16,7 @@ const menu = [
     { title: 'Major Scales', pathname: '/lessons/major_scales' }
   ]},
   { title: 'Chords', children: [
-    { title: 'Triads in C major', pathname: '/lessons/intro_chords' }
+    { title: 'Triads in Major Scales', pathname: '/lessons/triads' }
   ]},
   { title: 'Quizzes', children: [
     { title: 'Notation Quiz', pathname: '/quizzes/notation' }
@@ -26,21 +26,25 @@ const menu = [
 const Header = () => {
   const router = useRouter();
   const [ activeItem, setActiveItem ] = useState(null);
+  const [ activeParent, setActiveParent ] = useState(null);
   const [ burgerActive, setBurgerActive ] = useState(false);
 
   useEffect(() => {
     // menu blur fix
     document.activeElement?.classList?.contains("navbar-item") && document.activeElement.blur();
     let foundItem = null;
+    let foundParent = null;
     for (const item of menu) {
       if (item.children) {
         foundItem = item.children.find(child => child.pathname === router.pathname);
+        if (foundItem) foundParent = item;
       } else if (item.pathname === router.pathname) {
         foundItem = item;
       }
       if (foundItem) break;
     }
     setActiveItem(foundItem);
+    setActiveParent(foundParent);
   }, [ router.pathname ])
 
   const renderItem = (item,i) => (<Link key={i} href={item.pathname}>
@@ -85,6 +89,14 @@ const Header = () => {
         </div>
       </div>
     </nav>
+    {activeItem && (
+      <nav className="breadcrumb header-breadcrumbs" aria-label="breadcrumbs">
+      <ul>
+        {activeParent && (<li className="is-active"><a href="#">{activeParent.title}</a></li>)}
+        <li className="is-active"><a href="#" aria-current="page">{activeItem.title}</a></li>
+      </ul>
+    </nav>
+    )}
   </>);
 };
 

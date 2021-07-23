@@ -1,4 +1,4 @@
-import { Note, notesBetween, addOctaves, getInterval, noteCmp, notesToABC, applyTonePattern } from './notes';
+import { Note, notesBetween, addOctaves, getInterval, noteCmp, notesToABC, applyTonePattern, getDegreesInScale, chordName } from './notes';
 import { BadNoteError, BadNoteRangeError, MajorScalePattern } from 'appConstants';
 
 describe('Note class', () => {
@@ -42,16 +42,19 @@ describe('Note class', () => {
     expect(As5 > A5).toBeTruthy();
   });
 
-  it('can return base notes, accidentals, and octaves', () => {
+  it('can return natural notes, accidentals, and octaves', () => {
     const cs5 = new Note('C#5');
-    expect(cs5.baseNote()).toEqual('C');
+    expect(cs5.naturalNote()).toEqual('C');
     expect(cs5.accidental()).toEqual('#');
+    expect(cs5.note()).toEqual('C#');
     const df4 = new Note('Db5'); 
-    expect(df4.baseNote()).toEqual('D');
+    expect(df4.naturalNote()).toEqual('D');
     expect(df4.accidental()).toEqual('b');
+    expect(df4.note()).toEqual('Db');
     const a4 = new Note('A4');
-    expect(a4.baseNote()).toEqual('A');
+    expect(a4.naturalNote()).toEqual('A');
     expect(a4.accidental()).toEqual('');
+    expect(a4.note()).toEqual('A');
   });
 
   it('can convert a note to ABC notation', () => {
@@ -153,3 +156,33 @@ describe('applyTonePattern', () => {
     expect(applyTonePattern('G4', MajorScalePattern)).toEqual(['G4', 'A4', 'B4', 'C5', 'D5', 'E5', 'F#5', 'G5']);
   });
 });
+
+describe('getNotesInScale', () => {
+  it('can return notes by degrees', () => {
+    const Cmaj = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+    expect(getDegreesInScale([1,3,5],  Cmaj)).toEqual([ 'C4', 'E4', 'G4' ]);
+    expect(getDegreesInScale([2,4,6],  Cmaj)).toEqual([ 'D4', 'F4', 'A4' ]);
+    expect(getDegreesInScale([3,5,7],  Cmaj)).toEqual([ 'E4', 'G4', 'B4' ]);
+    expect(getDegreesInScale([4,6,8],  Cmaj)).toEqual([ 'F4', 'A4', 'C5' ]);
+    expect(getDegreesInScale([5,7,9],  Cmaj)).toEqual([ 'G4', 'B4', 'D5' ]);
+    expect(getDegreesInScale([6,8,10], Cmaj)).toEqual([ 'A4', 'C5', 'E5' ]);
+    expect(getDegreesInScale([7,9,11], Cmaj)).toEqual([ 'B4', 'D5', 'F5' ]);
+  });
+});
+
+describe('chordName', () => {
+  it('can name some chords', () => {
+    expect(chordName([ 'C4', 'E4', 'G4' ])).toEqual('Cmaj');
+    expect(chordName([ 'D4', 'F4', 'A4' ])).toEqual('Dmin');
+    expect(chordName([ 'E4', 'G4', 'B4' ])).toEqual('Emin');
+    expect(chordName([ 'F4', 'A4', 'C5' ])).toEqual('Fmaj');
+    expect(chordName([ 'G4', 'B4', 'D5' ])).toEqual('Gmaj');
+    expect(chordName([ 'A4', 'C5', 'E5' ])).toEqual('Amin');
+    expect(chordName([ 'B4', 'D5', 'F5' ])).toEqual('Bdim');
+  });
+
+  it('does not always know', () => {
+    expect(chordName([ 'B4', 'D5', 'G5' ])).toEqual('B???');
+  });
+});
+
