@@ -20,6 +20,9 @@ const menu = [
   ]},
   { title: 'Quizzes', children: [
     { title: 'Notation Quiz', pathname: '/quizzes/notation' }
+  ]},
+  { title: 'Tools', children: [
+    { title: 'Chord Progression Generator', pathname: '/tools/chord_progression' }
   ]}
 ];
 

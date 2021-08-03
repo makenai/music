@@ -74,6 +74,8 @@ export const ABCAccidentals = {
 };
 
 export const MajorScalePattern = 'TTSTTTS';
+export const MinorScalePattern = 'TSTTSTT';
+
 
 export const ChordTypes = {
     '4-3': 'maj',
